@@ -1,0 +1,24 @@
+{
+  "repoRoot": "C:\\Users\\joaop\\Desenvolvimento\\Projects\\luxview",
+  "cwd": "C:\\Users\\joaop\\Desenvolvimento\\Projects\\luxview",
+  "stack": {
+    "frameworks": [
+      "React"
+    ],
+    "componentLibraries": [],
+    "styling": [],
+    "componentDirectories": [],
+    "packageFiles": [
+      "package.json",
+      "packages\\server\\package.json",
+      "packages\\shared\\package.json",
+      "packages\\web\\package.json"
+    ]
+  },
+  "routes": [],
+  "tokens": {
+    "sources": [],
+    "tokens": []
+  },
+  "summary": "Repo root: C:\\Users\\joaop\\Desenvolvimento\\Projects\\luxview\nWorking directory: C:\\Users\\joaop\\Desenvolvimento\\Projects\\luxview\nFrameworks: React\nStyling: none detected\nComponent libraries: none detected\nRoute roots: none detected\nRoute candidates: none detected\nComponent directories: none detected\nToken sources: none detected\nVisible design language hints: no strong hints detected"
+}

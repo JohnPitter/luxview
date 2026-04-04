@@ -1,0 +1,279 @@
+<!--
+aesthetic_dna: Editorial Brutalism & Dark Luxury Cinematic
+ui_paradigm: Asymmetrical Scrollytelling / High-End Design Magazine
+palette_choice: Void Black (#050505), Off-White (#F4F4F5), Imperial Gold (#C8933A)
+-->
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxview | High-End Tech Excellence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Manrope', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        void: '#030303',
+                        charcoal: '#0a0a0a',
+                        gold: { DEFAULT: '#c8933a', light: '#e0b56b', dark: '#8b6320' },
+                        stone: '#8a8a8e',
+                        bone: '#e5e5e5'
+                    },
+                    boxShadow: { 'glow': '0 0 40px -10px rgba(200, 147, 58, 0.3)' }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #030303; color: #e5e5e5; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+        ::selection { background-color: #e0b56b; color: #030303; }
+        .text-fluid-hero { font-size: clamp(4rem, 12vw, 14rem); line-height: 0.85; }
+        .text-fluid-h2 { font-size: clamp(2.5rem, 6vw, 6rem); line-height: 1; }
+        .ambient-light-1 { position: absolute; top: 0; left: 10%; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(200,147,58,0.08) 0%, rgba(3,3,3,0) 70%); z-index: -1; pointer-events: none; border-radius: 50%; animation: pulse-slow 15s infinite alternate; }
+        .ambient-light-2 { position: fixed; bottom: -20%; right: -10%; width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(200,147,58,0.05) 0%, rgba(3,3,3,0) 70%); z-index: -1; pointer-events: none; border-radius: 50%; }
+        @keyframes pulse-slow { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(1.1) translate(-20px, 20px); opacity: 1; } }
+        .text-outline { color: transparent; -webkit-text-stroke: 1px #e5e5e5; opacity: 0.3; transition: all 0.4s ease; }
+        .group:hover .text-outline { color: #c8933a; -webkit-text-stroke: 0px; opacity: 1; }
+        .img-editorial { filter: grayscale(100%) contrast(1.1) brightness(0.8); transition: all 0.8s ease; width: 100%; height: 100%; object-fit: cover; }
+        .group:hover .img-editorial { filter: grayscale(0%) contrast(1) brightness(1); transform: scale(1.05); }
+        .service-cell { border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05); }
+        .service-cell:nth-child(3n) { border-right: none; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #030303; }
+        ::-webkit-scrollbar-thumb { background: rgba(200, 147, 58, 0.3); }
+        ::-webkit-scrollbar-thumb:hover { background: #c8933a; }
+    </style>
+</head>
+<body class="relative">
+    <div class="ambient-light-1"></div>
+    <div class="ambient-light-2"></div>
+    <nav class="fixed top-0 left-0 w-full z-50 mix-blend-difference px-6 py-8 md:px-12 flex justify-between items-center">
+        <div class="text-xl font-serif font-bold tracking-widest text-white uppercase flex items-center gap-2 group cursor-pointer">
+            <span class="w-2 h-2 bg-gold rounded-full group-hover:scale-150 transition-transform duration-300"></span>
+            Luxview
+        </div>
+        <div class="flex items-center gap-8 text-sm font-sans tracking-widest text-white uppercase">
+            <a href="#manifesto" class="hidden md:block hover:text-gold transition-colors">Manifesto</a>
+            <a href="#services" class="hidden md:block hover:text-gold transition-colors">Expertise</a>
+            <a href="#portfolio" class="hidden md:block hover:text-gold transition-colors">Archives</a>
+            <button class="relative overflow-hidden px-6 py-3 border border-white/20 group hover:border-gold transition-colors duration-500">
+                <span class="relative z-10 group-hover:text-void transition-colors duration-500">Engage</span>
+                <div class="absolute inset-0 bg-gold translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out z-0"></div>
+            </button>
+        </div>
+    </nav>
+    <header class="relative min-h-[100vh] flex flex-col justify-end pb-24 px-6 md:px-12 z-10 pt-32">
+        <div class="max-w-[1800px] mx-auto w-full flex flex-col items-center">
+            <div class="w-full flex justify-between items-end mb-8 md:mb-16 border-b border-white/10 pb-8">
+                <p class="font-sans text-stone uppercase tracking-[0.3em] text-xs md:text-sm max-w-[200px]">Est. 2024 — Global</p>
+            </div>
+            <h1 class="text-fluid-hero font-serif w-full text-left uppercase tracking-tighter flex flex-col">
+                <span class="block">Architecting</span>
+                <span class="block text-right italic text-gold mt-[-2%] pr-4 md:pr-12">Digital</span>
+                <span class="block ml-[10%] mt-[-2%]">Legacy.</span>
+            </h1>
+            <div class="w-full grid grid-cols-1 md:grid-cols-12 gap-8 mt-16 md:mt-24 items-start">
+                <div class="md:col-span-4 font-sans text-stone text-sm leading-relaxed max-w-sm">
+                    Operating at the vanguard of logic, aesthetics, and kinetic architecture. We forge expansive spatial experiences for the bold elite.
+                </div>
+                <div class="md:col-start-9 md:col-span-4 flex justify-end">
+                    <a href="#manifesto" class="flex items-center gap-4 text-white hover:text-gold transition-colors group cursor-pointer">
+                        <span class="uppercase tracking-widest text-xs font-semibold">Scroll to explore</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section id="manifesto" class="relative py-32 px-6 md:px-12 bg-charcoal/50 backdrop-blur-md">
+        <div class="max-w-[1800px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-8">
+            <div class="md:col-span-2">
+                <p class="font-sans text-gold uppercase tracking-[0.2em] text-xs sticky top-32">01 — Manifesto</p>
+            </div>
+            <div class="md:col-start-6 md:col-span-7 pt-12 md:pt-0">
+                <h2 class="text-fluid-h2 font-serif leading-[1.1] mb-12">
+                    <span class="block text-stone">Beyond visual.</span>
+                    <span class="block italic text-bone">Visceral engineering.</span>
+                </h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 font-sans text-stone/90 text-lg md:text-xl font-light leading-relaxed">
+                    <div>
+                        <p class="mb-6"><span class="text-gold font-serif text-5xl float-left mr-4 mt-2 leading-[0.8] italic">T</span>he digital realm has become saturated with templated mediocrity. Luxview was founded on a singular premise: to resurrect bespoke craftsmanship in software engineering.</p>
+                        <p>We combine brutalist structural principles with fluid computational logic. Every pixel is intentional. Every transition carries weight.</p>
+                    </div>
+                    <div class="relative">
+                        <div class="w-full aspect-[4/5] overflow-hidden group">
+                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Abstract architectural shadows" class="img-editorial">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="relative py-0 flex flex-col md:flex-row">
+        <div class="flex-1 border-b md:border-b-0 md:border-r border-white/10 p-12 md:p-16 lg:p-24 group relative overflow-hidden transition-all duration-700 hover:bg-white/[0.02]">
+            <div class="absolute inset-0 bg-gradient-to-b from-gold/0 to-gold/5 scale-y-0 group-hover:scale-y-100 transform origin-bottom transition-transform duration-700 ease-out pointer-events-none"></div>
+            <div class="font-serif text-8xl md:text-9xl text-outline mb-12 select-none group-hover:-translate-y-4 transition-transform duration-700">01</div>
+            <h3 class="font-sans text-2xl tracking-wide uppercase text-white mb-6">Structural Rigor</h3>
+            <p class="font-sans text-stone text-sm leading-loose max-w-sm">Architecture first. Highly scalable systems designed to withstand profound computational load.</p>
+        </div>
+        <div class="flex-1 border-b md:border-b-0 md:border-r border-white/10 p-12 md:p-16 lg:p-24 group relative overflow-hidden transition-all duration-700 hover:bg-white/[0.02]">
+            <div class="absolute inset-0 bg-gradient-to-b from-gold/0 to-gold/5 scale-y-0 group-hover:scale-y-100 transform origin-bottom transition-transform duration-700 ease-out pointer-events-none"></div>
+            <div class="font-serif text-8xl md:text-9xl text-outline mb-12 select-none group-hover:-translate-y-4 transition-transform duration-700">02</div>
+            <h3 class="font-sans text-2xl tracking-wide uppercase text-white mb-6">Cinematic Scale</h3>
+            <p class="font-sans text-stone text-sm leading-loose max-w-sm">Complex lighting models, physics-based rendering, and immersive scrollytelling.</p>
+        </div>
+        <div class="flex-1 p-12 md:p-16 lg:p-24 group relative overflow-hidden transition-all duration-700 hover:bg-white/[0.02]">
+            <div class="absolute inset-0 bg-gradient-to-b from-gold/0 to-gold/5 scale-y-0 group-hover:scale-y-100 transform origin-bottom transition-transform duration-700 ease-out pointer-events-none"></div>
+            <div class="font-serif text-8xl md:text-9xl text-outline mb-12 select-none group-hover:-translate-y-4 transition-transform duration-700">03</div>
+            <h3 class="font-sans text-2xl tracking-wide uppercase text-white mb-6">Kinetic Flow</h3>
+            <p class="font-sans text-stone text-sm leading-loose max-w-sm">Micro-interactions that define the subconscious feel of software, mapped to human expectation.</p>
+        </div>
+    </section>
+    <section id="services" class="py-32 px-6 md:px-12 bg-void relative">
+        <div class="max-w-[1800px] mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 gap-8">
+                <div>
+                    <p class="font-sans text-gold uppercase tracking-[0.2em] text-xs mb-6">02 — Expertise</p>
+                    <h2 class="text-fluid-h2 font-serif italic text-white leading-none">Disciplines.</h2>
+                </div>
+                <p class="font-sans text-stone text-sm max-w-md">Capabilities spanning the entire spectrum of digital product creation.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-white/5">
+                <div class="service-cell p-10 lg:p-14 group hover:bg-charcoal transition-colors duration-500">
+                    <div class="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center mb-12 group-hover:border-gold/50 group-hover:bg-gold/10 transition-all duration-300">
+                        <i class="ph ph-cube-transparent text-2xl text-stone group-hover:text-gold"></i>
+                    </div>
+                    <h4 class="font-serif text-3xl mb-4 text-white group-hover:text-gold transition-colors duration-300">Spatial Interfaces</h4>
+                    <p class="font-sans text-stone text-sm leading-relaxed">Volumetric web design with depth, physics, and continuous environments.</p>
+                </div>
+                <div class="service-cell p-10 lg:p-14 group hover:bg-charcoal transition-colors duration-500">
+                    <div class="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center mb-12 group-hover:border-gold/50 group-hover:bg-gold/10 transition-all duration-300">
+                        <i class="ph ph-chart-polar text-2xl text-stone group-hover:text-gold"></i>
+                    </div>
+                    <h4 class="font-serif text-3xl mb-4 text-white group-hover:text-gold transition-colors duration-300">Data Analytics</h4>
+                    <p class="font-sans text-stone text-sm leading-relaxed">Dense, beautiful, high-performance data dashboards.</p>
+                </div>
+                <div class="service-cell p-10 lg:p-14 group hover:bg-charcoal transition-colors duration-500">
+                    <div class="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center mb-12 group-hover:border-gold/50 group-hover:bg-gold/10 transition-all duration-300">
+                        <i class="ph ph-shopping-cart text-2xl text-stone group-hover:text-gold"></i>
+                    </div>
+                    <h4 class="font-serif text-3xl mb-4 text-white group-hover:text-gold transition-colors duration-300">Commerce</h4>
+                    <p class="font-sans text-stone text-sm leading-relaxed">Headless e-commerce with zero-latency transitions.</p>
+                </div>
+                <div class="service-cell p-10 lg:p-14 group hover:bg-charcoal transition-colors duration-500">
+                    <div class="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center mb-12 group-hover:border-gold/50 group-hover:bg-gold/10 transition-all duration-300">
+                        <i class="ph ph-film-strip text-2xl text-stone group-hover:text-gold"></i>
+                    </div>
+                    <h4 class="font-serif text-3xl mb-4 text-white group-hover:text-gold transition-colors duration-300">Cinematic UX</h4>
+                    <p class="font-sans text-stone text-sm leading-relaxed">Web experiences directed like films with emotional pacing.</p>
+                </div>
+                <div class="service-cell p-10 lg:p-14 group hover:bg-charcoal transition-colors duration-500">
+                    <div class="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center mb-12 group-hover:border-gold/50 group-hover:bg-gold/10 transition-all duration-300">
+                        <i class="ph ph-server text-2xl text-stone group-hover:text-gold"></i>
+                    </div>
+                    <h4 class="font-serif text-3xl mb-4 text-white group-hover:text-gold transition-colors duration-300">Systems</h4>
+                    <p class="font-sans text-stone text-sm leading-relaxed">Agile backend architecture with REST and GraphQL APIs.</p>
+                </div>
+                <div class="service-cell p-10 lg:p-14 group hover:bg-charcoal transition-colors duration-500 border-b-0">
+                    <div class="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center mb-12 group-hover:border-gold/50 group-hover:bg-gold/10 transition-all duration-300">
+                        <i class="ph ph-text-aa text-2xl text-stone group-hover:text-gold"></i>
+                    </div>
+                    <h4 class="font-serif text-3xl mb-4 text-white group-hover:text-gold transition-colors duration-300">AI & ML</h4>
+                    <p class="font-sans text-stone text-sm leading-relaxed">Intelligent automation and personalization solutions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-32 px-6 md:px-12 bg-charcoal relative overflow-hidden">
+        <div class="absolute -right-64 top-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-gold/10 to-transparent rounded-full pointer-events-none opacity-50"></div>
+        <div class="max-w-[1800px] mx-auto grid grid-cols-1 xl:grid-cols-12 gap-16 relative z-10">
+            <div class="xl:col-span-4">
+                <p class="font-sans text-gold uppercase tracking-[0.2em] text-xs mb-6">03 — Community</p>
+                <h2 class="font-serif text-5xl md:text-6xl text-white leading-tight mb-8">Direct the<br><i class="text-gold">Evolution.</i></h2>
+                <p class="font-sans text-stone text-sm leading-loose mb-12 max-w-sm">Every month we build the most-voted community project for free. Submit your idea and rally votes.</p>
+                <button class="flex items-center gap-4 text-xs font-sans tracking-widest uppercase border border-white/20 px-8 py-4 hover:bg-white hover:text-void transition-colors duration-300">
+                    Submit Idea
+                </button>
+            </div>
+            <div class="xl:col-span-8 flex flex-col gap-4">
+                <div class="group border border-white/10 bg-void/50 backdrop-blur-sm p-6 md:p-8 flex flex-col md:flex-row justify-between md:items-center relative overflow-hidden transition-all duration-500 hover:border-gold/30">
+                    <div class="absolute left-0 bottom-0 h-1 bg-gold w-0 group-hover:w-[68%] transition-all duration-[1500ms] ease-out"></div>
+                    <div class="mb-6 md:mb-0">
+                        <span class="font-sans text-xs uppercase tracking-widest text-stone">12 votos</span>
+                        <h4 class="font-serif text-2xl text-white group-hover:text-gold transition-all duration-300">App de Delivery Premium</h4>
+                    </div>
+                    <button class="shrink-0 w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white group-hover:bg-gold group-hover:text-void group-hover:border-gold transition-all duration-300">
+                        <i class="ph ph-arrow-up text-lg"></i>
+                    </button>
+                </div>
+                <div class="group border border-white/10 bg-void/50 backdrop-blur-sm p-6 md:p-8 flex flex-col md:flex-row justify-between md:items-center relative overflow-hidden transition-all duration-500 hover:border-gold/30">
+                    <div class="absolute left-0 bottom-0 h-1 bg-gold w-0 group-hover:w-[24%] transition-all duration-[1500ms] ease-out"></div>
+                    <div class="mb-6 md:mb-0">
+                        <span class="font-sans text-xs uppercase tracking-widest text-stone">5 votos</span>
+                        <h4 class="font-serif text-2xl text-white group-hover:text-gold transition-all duration-300">Sistema de Agendamento</h4>
+                    </div>
+                    <button class="shrink-0 w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white group-hover:bg-gold group-hover:text-void group-hover:border-gold transition-all duration-300">
+                        <i class="ph ph-arrow-up text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="portfolio" class="py-32 px-6 md:px-12 bg-void relative">
+        <div class="max-w-[1800px] mx-auto">
+            <p class="font-sans text-gold uppercase tracking-[0.2em] text-xs mb-16">04 — Portfolio</p>
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10">
+                <div class="md:col-span-7 group cursor-pointer">
+                    <div class="w-full aspect-[16/10] overflow-hidden relative mb-6">
+                        <img src="https://images.unsplash.com/photo-1557672172-298e090bd0f1?auto=format&fit=crop&w=1200&q=80" alt="Project" class="img-editorial">
+                    </div>
+                    <h3 class="font-serif text-3xl md:text-5xl text-white mb-2 group-hover:text-gold transition-colors">Aether UI</h3>
+                    <p class="font-sans text-stone text-sm">Trading Terminal</p>
+                </div>
+                <div class="md:col-span-5 grid grid-cols-1 gap-10">
+                    <div class="group cursor-pointer">
+                        <div class="w-full aspect-square overflow-hidden relative mb-6 md:mt-32">
+                            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80" alt="Project" class="img-editorial">
+                        </div>
+                        <h3 class="font-serif text-2xl text-white group-hover:text-gold transition-colors">Monolith</h3>
+                        <p class="font-sans text-stone text-sm">Architecture Portal</p>
+                    </div>
+                    <div class="group cursor-pointer">
+                        <div class="w-full aspect-video overflow-hidden relative mb-6">
+                            <img src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=800&q=80" alt="Project" class="img-editorial">
+                        </div>
+                        <h3 class="font-serif text-2xl text-white group-hover:text-gold transition-colors">Syndicate</h3>
+                        <p class="font-sans text-stone text-sm">Asset Dashboard</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="relative bg-charcoal border-t border-white/5 pt-32 pb-12 flex flex-col items-center">
+        <h2 class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-serif text-[clamp(10rem,30vw,30rem)] text-white/[0.02] select-none pointer-events-none italic whitespace-nowrap">Luxview</h2>
+        <div class="relative z-10 w-full max-w-[1800px] px-6 md:px-12 flex flex-col items-center">
+            <p class="font-sans text-stone uppercase tracking-[0.2em] text-xs mb-8">Contato</p>
+            <a href="mailto:contato@luxview.com.br" class="group flex flex-col items-center text-center">
+                <h2 class="font-serif text-[clamp(3rem,8vw,8rem)] text-white hover:text-gold transition-colors duration-500 leading-none">Start a <span class="italic">Project.</span></h2>
+                <div class="mt-8 relative overflow-hidden px-8 py-4 border border-white/20 rounded-full group-hover:border-gold transition-colors duration-500 bg-void/50 backdrop-blur-md">
+                    <span class="font-sans text-sm tracking-widest uppercase relative z-10 text-white group-hover:text-void transition-colors duration-500">contato@luxview.com.br</span>
+                    <div class="absolute inset-0 bg-gold translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out z-0 rounded-full"></div>
+                </div>
+            </a>
+            <div class="w-full mt-32 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="font-serif text-2xl text-white tracking-wider flex items-center gap-1">Luxview <span class="w-1.5 h-1.5 bg-gold rounded-full inline-block"></span></div>
+                <p class="text-xs font-sans tracking-widest uppercase text-stone">&copy; 2024 Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

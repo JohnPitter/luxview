@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import LogoIcon from './LogoIcon'
 
 export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -18,14 +17,14 @@ export default function Nav() {
     <>
       <nav className="nav">
         <a href="#hero" className="nav-logo">
-          <LogoIcon className="nav-logo-icon" />
+          <span className="nav-logo-dot"></span>
           <span className="nav-logo-text">Luxview</span>
         </a>
         <div className="nav-links">
-          <a href="#sobre">Sobre</a>
-          <a href="#servicos">Serviços</a>
+          <a href="#sobre">Manifesto</a>
+          <a href="#servicos">Expertise</a>
           <a href="#ideias">Projeto do Mês</a>
-          <a href="#projetos">Projetos</a>
+          <a href="#projetos">Archives</a>
           <a href="#contato">Contato</a>
         </div>
         <button className="nav-toggle" onClick={toggleMenu} aria-label="Menu">
@@ -34,10 +33,10 @@ export default function Nav() {
       </nav>
 
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
-        <a href="#sobre" onClick={closeMenu}>Sobre</a>
-        <a href="#servicos" onClick={closeMenu}>Serviços</a>
+        <a href="#sobre" onClick={closeMenu}>Manifesto</a>
+        <a href="#servicos" onClick={closeMenu}>Expertise</a>
         <a href="#ideias" onClick={closeMenu}>Projeto do Mês</a>
-        <a href="#projetos" onClick={closeMenu}>Projetos</a>
+        <a href="#projetos" onClick={closeMenu}>Archives</a>
         <a href="#contato" onClick={closeMenu}>Contato</a>
       </div>
     </>

@@ -5,19 +5,14 @@ export default function ContactSection() {
 
   return (
     <section className="section section-contact" id="contato">
+      <div className="contact-watermark" aria-hidden="true">Luxview</div>
       <div className="section-inner" ref={sectionRef}>
         <div className="section-eyebrow">Contato</div>
-        <h2 className="section-heading">
-          Vamos iluminar o seu<br/>próximo projeto?
+        <h2 className="contact-heading">
+          Start a <span className="contact-heading-italic">Project.</span>
         </h2>
-        <p className="contact-lead">
-          Cada grande transformação começa com uma conversa.
-        </p>
         <a href="mailto:contato@luxview.com.br" className="contact-btn">
-          <span>Iniciar Conversa</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
+          <span>contato@luxview.com.br</span>
         </a>
       </div>
     </section>
