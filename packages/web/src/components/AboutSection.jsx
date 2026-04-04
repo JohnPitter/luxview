@@ -36,7 +36,7 @@ export default function AboutSection() {
             <div className="narrative-text narrative-with-image reverse" data-scroll-fade="0.50,0.65">
               <div className="narrative-image">
                 <img
-                  src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80&auto=format&fit=crop"
+                  src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&q=80&auto=format&fit=crop"
                   alt="Technology"
                   loading="lazy"
                 />
