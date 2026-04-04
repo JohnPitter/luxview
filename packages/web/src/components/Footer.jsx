@@ -1,4 +1,7 @@
+import { useTranslation } from '../i18n'
+
 export default function Footer() {
+  const { t } = useTranslation()
   return (
     <footer className="footer">
       <div className="footer-inner">
@@ -10,7 +13,7 @@ export default function Footer() {
           <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
         </div>
-        <span className="footer-copy">&copy; {new Date().getFullYear()} Todos os direitos reservados.</span>
+        <span className="footer-copy">&copy; {new Date().getFullYear()} {t('footer.rights')}</span>
       </div>
     </footer>
   )

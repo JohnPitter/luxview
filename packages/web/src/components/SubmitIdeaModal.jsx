@@ -1,9 +1,11 @@
 import { useState } from 'react'
+import { useTranslation } from '../i18n'
 
 const TITLE_MAX = 80
 const DESC_MAX = 500
 
 export default function SubmitIdeaModal({ onClose, onSubmitted }) {
+  const { t } = useTranslation()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [title, setTitle] = useState('')
@@ -16,7 +18,7 @@ export default function SubmitIdeaModal({ onClose, onSubmitted }) {
     setError('')
 
     if (!name.trim() || !email.trim() || !title.trim() || !description.trim()) {
-      setError('Preencha todos os campos.')
+      setError(t('modal.error_fill'))
       return
     }
 
@@ -42,7 +44,7 @@ export default function SubmitIdeaModal({ onClose, onSubmitted }) {
 
       onSubmitted()
     } catch (err) {
-      setError('Erro de conexão. Tente novamente.')
+      setError(t('modal.error_connection'))
     } finally {
       setLoading(false)
     }
@@ -57,19 +59,19 @@ export default function SubmitIdeaModal({ onClose, onSubmitted }) {
           </svg>
         </button>
 
-        <h2 className="modal-title">Envie sua ideia</h2>
+        <h2 className="modal-title">{t('modal.title')}</h2>
         <p className="modal-subtitle">
-          Descreva o projeto que você gostaria que a Luxview desenvolvesse gratuitamente.
+          {t('modal.subtitle')}
         </p>
 
         {error && <div className="modal-error">{error}</div>}
 
         <form className="modal-form" onSubmit={handleSubmit}>
           <div className="form-group">
-            <label>Seu Nome</label>
+            <label>{t('modal.name_label')}</label>
             <input
               type="text"
-              placeholder="Ex: Maria Silva"
+              placeholder={t('modal.name_placeholder')}
               value={name}
               onChange={(e) => setName(e.target.value)}
               maxLength={100}
@@ -78,22 +80,22 @@ export default function SubmitIdeaModal({ onClose, onSubmitted }) {
           </div>
 
           <div className="form-group">
-            <label>Seu Email</label>
+            <label>{t('modal.email_label')}</label>
             <input
               type="email"
-              placeholder="email@exemplo.com"
+              placeholder={t('modal.email_placeholder')}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <span className="form-hint">Usado apenas para contato caso seu projeto seja contemplado.</span>
+            <span className="form-hint">{t('modal.email_hint')}</span>
           </div>
 
           <div className="form-group">
-            <label>Título da Ideia <span className="char-count">{title.length}/{TITLE_MAX}</span></label>
+            <label>{t('modal.idea_label')} <span className="char-count">{title.length}/{TITLE_MAX}</span></label>
             <input
               type="text"
-              placeholder="Ex: App de Delivery para Pet Shops"
+              placeholder={t('modal.idea_placeholder')}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               maxLength={TITLE_MAX}
@@ -102,9 +104,9 @@ export default function SubmitIdeaModal({ onClose, onSubmitted }) {
           </div>
 
           <div className="form-group">
-            <label>Descrição <span className="char-count">{description.length}/{DESC_MAX}</span></label>
+            <label>{t('modal.desc_label')} <span className="char-count">{description.length}/{DESC_MAX}</span></label>
             <textarea
-              placeholder="Descreva sua ideia com detalhes..."
+              placeholder={t('modal.desc_placeholder')}
               rows="4"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -114,7 +116,7 @@ export default function SubmitIdeaModal({ onClose, onSubmitted }) {
           </div>
 
           <button type="submit" className="modal-submit-btn" disabled={loading}>
-            {loading ? 'Enviando...' : 'Enviar Ideia'}
+            {loading ? t('modal.submitting') : t('modal.submit')}
           </button>
         </form>
       </div>

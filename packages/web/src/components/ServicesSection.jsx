@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useRevealAnimations } from '../hooks/useRevealAnimation'
+import { useTranslation } from '../i18n'
 
 const STORAGE_KEY = 'luxview_services'
 
@@ -27,6 +28,7 @@ const DEFAULT_SERVICES = [
 export { STORAGE_KEY as SERVICES_STORAGE_KEY, SERVICE_ICONS, DEFAULT_SERVICES }
 
 export default function ServicesSection() {
+  const { t } = useTranslation()
   const gridRef = useRevealAnimations('.service-card')
   const [services, setServices] = useState([])
 
@@ -43,9 +45,11 @@ export default function ServicesSection() {
   return (
     <section className="section section-services" id="servicos">
       <div className="section-inner">
-        <div className="section-eyebrow">Áreas de Atuação</div>
+        <div className="section-eyebrow">{t('services.eyebrow')}</div>
         <h2 className="section-heading">
-          Onde a inovação encontra<br/>o seu negócio.
+          {t('services.heading').split('\n').map((line, i) => (
+            <span key={i}>{line}{i === 0 && <br/>}</span>
+          ))}
         </h2>
         <div className="services-grid" ref={gridRef}>
           {services.map((service, index) => (

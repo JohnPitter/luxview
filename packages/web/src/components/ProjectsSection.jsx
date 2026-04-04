@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useRevealAnimation, useRevealAnimations } from '../hooks/useRevealAnimation'
+import { useTranslation } from '../i18n'
 
 const STORAGE_KEY = 'luxview_projects'
 
 export default function ProjectsSection() {
+  const { t } = useTranslation()
   const [projects, setProjects] = useState([])
   const headerRef = useRevealAnimation()
   const gridRef = useRevealAnimations('.project-card')
@@ -17,9 +19,11 @@ export default function ProjectsSection() {
     <section className="section section-projects" id="projetos">
       <div className="section-inner">
         <div ref={headerRef}>
-          <div className="section-eyebrow">Portfólio</div>
+          <div className="section-eyebrow">{t('projects.eyebrow')}</div>
           <h2 className="section-heading">
-            Projetos que iluminam<br/>resultados.
+            {t('projects.heading').split('\n').map((line, i) => (
+              <span key={i}>{line}{i === 0 && <br/>}</span>
+            ))}
           </h2>
         </div>
 
@@ -43,7 +47,7 @@ export default function ProjectsSection() {
                   <h3 className="project-card-title">{project.title}</h3>
                   <p className="project-card-desc">{project.description}</p>
                   <span className="project-card-link">
-                    Ver Projeto
+                    {t('projects.view')}
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M5 12h14M12 5l7 7-7 7"/>
                     </svg>
@@ -60,7 +64,7 @@ export default function ProjectsSection() {
                 <path d="M24 32h16M32 24v16" stroke="currentColor" strokeWidth="1.5" opacity="0.4"/>
               </svg>
             </div>
-            <p>Projetos em breve.</p>
+            <p>{t('projects.empty')}</p>
           </div>
         )}
       </div>

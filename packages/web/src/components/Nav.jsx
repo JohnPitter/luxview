@@ -1,6 +1,10 @@
 import { useState } from 'react'
+import ThemeToggle from './ThemeToggle'
+import LanguageSelector from './LanguageSelector'
+import { useTranslation } from '../i18n'
 
 export default function Nav() {
+  const { t } = useTranslation()
   const [menuOpen, setMenuOpen] = useState(false)
 
   function toggleMenu() {
@@ -21,11 +25,13 @@ export default function Nav() {
           <span className="nav-logo-text">Luxview</span>
         </a>
         <div className="nav-links">
-          <a href="#sobre">Manifesto</a>
-          <a href="#servicos">Expertise</a>
-          <a href="#ideias">Projeto do Mês</a>
-          <a href="#projetos">Archives</a>
-          <a href="#contato">Contato</a>
+          <a href="#sobre">{t('nav.manifesto')}</a>
+          <a href="#servicos">{t('nav.expertise')}</a>
+          <a href="#ideias">{t('nav.project_month')}</a>
+          <a href="#projetos">{t('nav.archives')}</a>
+          <a href="#contato">{t('nav.contact')}</a>
+          <LanguageSelector />
+          <ThemeToggle />
         </div>
         <button className="nav-toggle" onClick={toggleMenu} aria-label="Menu">
           <span></span><span></span><span></span>
@@ -33,11 +39,11 @@ export default function Nav() {
       </nav>
 
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
-        <a href="#sobre" onClick={closeMenu}>Manifesto</a>
-        <a href="#servicos" onClick={closeMenu}>Expertise</a>
-        <a href="#ideias" onClick={closeMenu}>Projeto do Mês</a>
-        <a href="#projetos" onClick={closeMenu}>Archives</a>
-        <a href="#contato" onClick={closeMenu}>Contato</a>
+        <a href="#sobre" onClick={closeMenu}>{t('nav.manifesto')}</a>
+        <a href="#servicos" onClick={closeMenu}>{t('nav.expertise')}</a>
+        <a href="#ideias" onClick={closeMenu}>{t('nav.project_month')}</a>
+        <a href="#projetos" onClick={closeMenu}>{t('nav.archives')}</a>
+        <a href="#contato" onClick={closeMenu}>{t('nav.contact')}</a>
       </div>
     </>
   )

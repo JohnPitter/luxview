@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
 import { useRevealAnimation, useRevealAnimations } from '../hooks/useRevealAnimation'
 import SubmitIdeaModal from './SubmitIdeaModal'
+import { useTranslation } from '../i18n'
 
 export default function IdeaSection() {
+  const { t } = useTranslation()
   const [ideas, setIdeas] = useState([])
   const [showModal, setShowModal] = useState(false)
   const [votingId, setVotingId] = useState(null)
@@ -50,9 +52,9 @@ export default function IdeaSection() {
   function timeAgo(dateStr) {
     const diff = Date.now() - new Date(dateStr).getTime()
     const days = Math.floor(diff / 86400000)
-    if (days === 0) return 'hoje'
-    if (days === 1) return 'há 1 dia'
-    return `há ${days} dias`
+    if (days === 0) return t('ideas.time_today')
+    if (days === 1) return t('ideas.time_1day')
+    return t('ideas.time_days', { n: days })
   }
 
   function handleIdeaSubmitted() {
@@ -64,16 +66,17 @@ export default function IdeaSection() {
     <section className="section section-ideas" id="ideias">
       <div className="section-inner">
         <div ref={headerRef}>
-          <div className="section-eyebrow">Projeto do Mês</div>
+          <div className="section-eyebrow">{t('ideas.eyebrow')}</div>
           <h2 className="section-heading">
-            Sua ideia pode<br />ganhar vida.
+            {t('ideas.heading').split('\n').map((line, i) => (
+              <span key={i}>{line}{i === 0 && <br/>}</span>
+            ))}
           </h2>
           <p className="ideas-lead">
-            Todo mês desenvolvemos gratuitamente o projeto mais votado pela comunidade.
-            Envie sua ideia e conquiste votos!
+            {t('ideas.lead')}
           </p>
           <button className="ideas-submit-btn" onClick={() => setShowModal(true)}>
-            Enviar Minha Ideia
+            {t('ideas.submit_btn')}
           </button>
         </div>
 
@@ -82,7 +85,7 @@ export default function IdeaSection() {
             {ideas.map((idea, index) => (
               <div className="idea-card" key={idea._id}>
                 {index === 0 && idea.voteCount > 0 && (
-                  <span className="idea-badge">Liderando</span>
+                  <span className="idea-badge">{t('ideas.badge_leading')}</span>
                 )}
                 <div className="idea-card-header">
                   <div className="idea-votes">
@@ -102,7 +105,7 @@ export default function IdeaSection() {
                     <h3 className="idea-card-title">{idea.title}</h3>
                     <p className="idea-card-desc">{idea.description}</p>
                     <div className="idea-card-meta">
-                      <span>por {idea.name}</span>
+                      <span>{t('ideas.by')} {idea.name}</span>
                       <span>{timeAgo(idea.createdAt)}</span>
                     </div>
                   </div>
@@ -112,7 +115,7 @@ export default function IdeaSection() {
           </div>
         ) : (
           <div className="ideas-empty">
-            <p>Nenhuma ideia submetida neste mês. Seja o primeiro!</p>
+            <p>{t('ideas.empty')}</p>
           </div>
         )}
       </div>

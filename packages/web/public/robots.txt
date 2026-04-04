@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://luxview.com.br/sitemap.xml
