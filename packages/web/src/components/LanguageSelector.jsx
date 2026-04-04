@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { useTranslation, SUPPORTED_LANGS } from '../i18n'
+import { useTranslation, SUPPORTED_LANGS } from '../i18n/index.jsx'
 
 const FLAGS = {
   br: (

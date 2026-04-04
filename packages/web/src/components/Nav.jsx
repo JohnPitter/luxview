@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import ThemeToggle from './ThemeToggle'
 import LanguageSelector from './LanguageSelector'
-import { useTranslation } from '../i18n'
+import { useTranslation } from '../i18n/index.jsx'
 
 export default function Nav() {
   const { t } = useTranslation()

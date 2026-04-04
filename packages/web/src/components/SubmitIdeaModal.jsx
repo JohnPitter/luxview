@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useTranslation } from '../i18n'
+import { useTranslation } from '../i18n/index.jsx'
 
 const TITLE_MAX = 80
 const DESC_MAX = 500

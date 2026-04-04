@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useRevealAnimation, useRevealAnimations } from '../hooks/useRevealAnimation'
 import SubmitIdeaModal from './SubmitIdeaModal'
-import { useTranslation } from '../i18n'
+import { useTranslation } from '../i18n/index.jsx'
 
 export default function IdeaSection() {
   const { t } = useTranslation()

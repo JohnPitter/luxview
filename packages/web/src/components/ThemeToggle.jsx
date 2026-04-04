@@ -1,5 +1,5 @@
 import { useTheme } from '../hooks/useTheme'
-import { useTranslation } from '../i18n'
+import { useTranslation } from '../i18n/index.jsx'
 
 export default function ThemeToggle() {
   const { t } = useTranslation()

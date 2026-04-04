@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useRevealAnimations } from '../hooks/useRevealAnimation'
-import { useTranslation } from '../i18n'
+import { useTranslation } from '../i18n/index.jsx'
 
 const STORAGE_KEY = 'luxview_services'
 

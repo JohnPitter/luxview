@@ -1,5 +1,5 @@
 import { useScrollNarrative } from '../hooks/useScrollNarrative'
-import { useTranslation } from '../i18n'
+import { useTranslation } from '../i18n/index.jsx'
 
 export default function AboutSection() {
   const { t } = useTranslation()
@@ -20,12 +20,30 @@ export default function AboutSection() {
               </h2>
             </div>
 
-            <div className="narrative-text" data-scroll-fade="0.25,0.40">
-              <p><span className="narrative-drop-cap">{t('about.drop_cap')}</span>{t('about.text_1')}</p>
+            <div className="narrative-text narrative-with-image" data-scroll-fade="0.25,0.40">
+              <div className="narrative-text-content">
+                <p><span className="narrative-drop-cap">{t('about.drop_cap')}</span>{t('about.text_1')}</p>
+              </div>
+              <div className="narrative-image">
+                <img
+                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80&auto=format&fit=crop"
+                  alt="Architecture"
+                  loading="lazy"
+                />
+              </div>
             </div>
 
-            <div className="narrative-text" data-scroll-fade="0.50,0.65">
-              <p>{t('about.text_2')}</p>
+            <div className="narrative-text narrative-with-image reverse" data-scroll-fade="0.50,0.65">
+              <div className="narrative-image">
+                <img
+                  src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80&auto=format&fit=crop"
+                  alt="Technology"
+                  loading="lazy"
+                />
+              </div>
+              <div className="narrative-text-content">
+                <p>{t('about.text_2')}</p>
+              </div>
             </div>
 
             <div className="narrative-text narrative-emphasis" data-scroll-fade="0.75,0.92">

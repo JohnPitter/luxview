@@ -1,5 +1,5 @@
 import { useRevealAnimation } from '../hooks/useRevealAnimation'
-import { useTranslation } from '../i18n'
+import { useTranslation } from '../i18n/index.jsx'
 
 export default function ContactSection() {
   const { t } = useTranslation()

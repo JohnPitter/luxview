@@ -1,5 +1,5 @@
 import { useScrollNarrative } from '../hooks/useScrollNarrative'
-import { useTranslation } from '../i18n'
+import { useTranslation } from '../i18n/index.jsx'
 
 export default function HeroSection() {
   const { t } = useTranslation()
@@ -7,6 +7,14 @@ export default function HeroSection() {
 
   return (
     <section className="scroll-section hero-section" id="hero" ref={sectionRef}>
+      <div className="hero-bg-image" aria-hidden="true">
+        <img
+          src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80&auto=format&fit=crop"
+          alt=""
+          loading="eager"
+        />
+        <div className="hero-bg-overlay"></div>
+      </div>
       <div className="ambient-orbs" aria-hidden="true">
         <div className="orb orb-1"></div>
         <div className="orb orb-2"></div>

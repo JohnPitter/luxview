@@ -1,4 +1,4 @@
-import { useTranslation } from '../i18n'
+import { useTranslation } from '../i18n/index.jsx'
 
 export default function Footer() {
   const { t } = useTranslation()
