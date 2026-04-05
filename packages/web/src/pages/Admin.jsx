@@ -36,11 +36,14 @@ export default function Admin() {
   const debounceRef = useRef(null)
 
   // Services state
+  const LANGS = ['pt-BR', 'en', 'es', 'zh', 'ja']
+  const LANG_LABELS = { 'pt-BR': 'PT', en: 'EN', es: 'ES', zh: 'ZH', ja: 'JA' }
   const [services, setServices] = useState([])
-  const [svcTitle, setSvcTitle] = useState('')
-  const [svcDesc, setSvcDesc] = useState('')
+  const [svcTitles, setSvcTitles] = useState({})
+  const [svcDescs, setSvcDescs] = useState({})
+  const [svcTagsMap, setSvcTagsMap] = useState({})
   const [svcIcon, setSvcIcon] = useState('web')
-  const [svcTags, setSvcTags] = useState('')
+  const [svcLang, setSvcLang] = useState('pt-BR')
   const [editingSvcId, setEditingSvcId] = useState(null)
 
   useEffect(() => {
@@ -111,47 +114,70 @@ export default function Admin() {
     showToast('Projeto removido.')
   }
 
+  function clearSvcForm() {
+    setSvcTitles({})
+    setSvcDescs({})
+    setSvcTagsMap({})
+    setSvcIcon('web')
+    setSvcLang('pt-BR')
+    setEditingSvcId(null)
+  }
+
   function handleServiceSubmit(e) {
     e.preventDefault()
-    if (!svcTitle.trim() || !svcDesc.trim()) return
+    const ptTitle = (svcTitles['pt-BR'] || '').trim()
+    const ptDesc = (svcDescs['pt-BR'] || '').trim()
+    if (!ptTitle || !ptDesc) {
+      showToast('Preencha pelo menos o título e descrição em PT-BR.')
+      return
+    }
 
-    const tags = svcTags.split(',').map(t => t.trim()).filter(Boolean)
+    const title = {}
+    const description = {}
+    const tags = {}
+    LANGS.forEach(lang => {
+      title[lang] = (svcTitles[lang] || ptTitle).trim()
+      description[lang] = (svcDescs[lang] || ptDesc).trim()
+      tags[lang] = (svcTagsMap[lang] || '').split(',').map(t => t.trim()).filter(Boolean)
+    })
 
     if (editingSvcId) {
       const updated = services.map(s =>
         s.id === editingSvcId
-          ? { ...s, title: svcTitle.trim(), description: svcDesc.trim(), icon: svcIcon, tags }
+          ? { ...s, title, description, icon: svcIcon, tags }
           : s
       )
       setServices(updated)
       localStorage.setItem(SERVICES_STORAGE_KEY, JSON.stringify(updated))
-      setEditingSvcId(null)
       showToast('Serviço atualizado!')
     } else {
-      const newSvc = {
-        id: Date.now().toString(),
-        icon: svcIcon,
-        title: svcTitle.trim(),
-        description: svcDesc.trim(),
-        tags,
-      }
+      const newSvc = { id: Date.now().toString(), icon: svcIcon, title, description, tags }
       const updated = [...services, newSvc]
       setServices(updated)
       localStorage.setItem(SERVICES_STORAGE_KEY, JSON.stringify(updated))
       showToast('Serviço cadastrado!')
     }
 
-    setSvcTitle('')
-    setSvcDesc('')
-    setSvcIcon('web')
-    setSvcTags('')
+    clearSvcForm()
   }
 
   function editService(svc) {
-    setSvcTitle(svc.title)
-    setSvcDesc(svc.description)
+    if (typeof svc.title === 'object') {
+      setSvcTitles(svc.title)
+      setSvcDescs(svc.description)
+      const tagsStr = {}
+      LANGS.forEach(lang => { tagsStr[lang] = (svc.tags[lang] || []).join(', ') })
+      setSvcTagsMap(tagsStr)
+    } else {
+      // Legacy format (single language)
+      const t = {}; const d = {}; const tg = {}
+      LANGS.forEach(lang => { t[lang] = svc.title || ''; d[lang] = svc.description || ''; tg[lang] = (svc.tags || []).join(', ') })
+      setSvcTitles(t)
+      setSvcDescs(d)
+      setSvcTagsMap(tg)
+    }
     setSvcIcon(svc.icon)
-    setSvcTags(svc.tags.join(', '))
+    setSvcLang('pt-BR')
     setEditingSvcId(svc.id)
   }
 
@@ -316,26 +342,6 @@ export default function Admin() {
 
             <form className="admin-form" onSubmit={handleServiceSubmit}>
               <div className="form-group">
-                <label>Título do Serviço</label>
-                <input
-                  type="text"
-                  placeholder="Ex: Desenvolvimento Web"
-                  value={svcTitle}
-                  onChange={(e) => setSvcTitle(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label>Descrição</label>
-                <input
-                  type="text"
-                  placeholder="Ex: Plataformas web modernas e responsivas."
-                  value={svcDesc}
-                  onChange={(e) => setSvcDesc(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="form-group">
                 <label>Ícone</label>
                 <div className="icon-picker">
                   {ICON_OPTIONS.map(key => (
@@ -352,15 +358,55 @@ export default function Admin() {
                   ))}
                 </div>
               </div>
+
+              <div className="lang-tabs">
+                {LANGS.map(lang => (
+                  <button
+                    type="button"
+                    key={lang}
+                    className={`lang-tab ${svcLang === lang ? 'active' : ''}`}
+                    onClick={() => setSvcLang(lang)}
+                  >
+                    {LANG_LABELS[lang]}
+                    {lang === 'pt-BR' && ' *'}
+                  </button>
+                ))}
+              </div>
+
               <div className="form-group">
-                <label>Tags (separadas por vírgula)</label>
+                <label>Título ({LANG_LABELS[svcLang]})</label>
+                <input
+                  type="text"
+                  placeholder={svcLang === 'pt-BR' ? 'Ex: Desenvolvimento Web' : `Title in ${LANG_LABELS[svcLang]}`}
+                  value={svcTitles[svcLang] || ''}
+                  onChange={(e) => setSvcTitles(prev => ({ ...prev, [svcLang]: e.target.value }))}
+                  required={svcLang === 'pt-BR'}
+                />
+              </div>
+              <div className="form-group">
+                <label>Descrição ({LANG_LABELS[svcLang]})</label>
+                <input
+                  type="text"
+                  placeholder={svcLang === 'pt-BR' ? 'Ex: Plataformas web modernas.' : `Description in ${LANG_LABELS[svcLang]}`}
+                  value={svcDescs[svcLang] || ''}
+                  onChange={(e) => setSvcDescs(prev => ({ ...prev, [svcLang]: e.target.value }))}
+                  required={svcLang === 'pt-BR'}
+                />
+              </div>
+              <div className="form-group">
+                <label>Tags ({LANG_LABELS[svcLang]}) — separadas por vírgula</label>
                 <input
                   type="text"
                   placeholder="Ex: E-commerce, SaaS, Portais"
-                  value={svcTags}
-                  onChange={(e) => setSvcTags(e.target.value)}
+                  value={svcTagsMap[svcLang] || ''}
+                  onChange={(e) => setSvcTagsMap(prev => ({ ...prev, [svcLang]: e.target.value }))}
                 />
               </div>
+
+              {svcLang !== 'pt-BR' && !svcTitles[svcLang] && (
+                <p className="form-hint">Campos vazios usarão o texto em PT-BR como fallback.</p>
+              )}
+
               <div className="admin-form-actions">
                 <button type="submit" className="admin-btn admin-btn-primary">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -369,11 +415,7 @@ export default function Admin() {
                   {editingSvcId ? 'Atualizar Serviço' : 'Adicionar Serviço'}
                 </button>
                 {editingSvcId && (
-                  <button
-                    type="button"
-                    className="admin-btn admin-btn-danger"
-                    onClick={() => { setEditingSvcId(null); setSvcTitle(''); setSvcDesc(''); setSvcIcon('web'); setSvcTags(''); }}
-                  >
+                  <button type="button" className="admin-btn admin-btn-danger" onClick={clearSvcForm}>
                     Cancelar
                   </button>
                 )}
@@ -382,24 +424,29 @@ export default function Admin() {
 
             {services.length > 0 && (
               <div className="admin-services-list">
-                {services.map((svc) => (
-                  <div className="admin-service-item" key={svc.id}>
-                    <div className="admin-service-icon">{SERVICE_ICONS[svc.icon]}</div>
-                    <div className="admin-service-info">
-                      <h3>{svc.title}</h3>
-                      <p>{svc.description}</p>
-                      {svc.tags.length > 0 && (
-                        <div className="admin-service-tags">
-                          {svc.tags.map((tag, i) => <span key={i}>{tag}</span>)}
-                        </div>
-                      )}
+                {services.map((svc) => {
+                  const svcDisplayTitle = typeof svc.title === 'object' ? svc.title['pt-BR'] : (svc.titleKey || svc.title || '')
+                  const svcDisplayDesc = typeof svc.description === 'object' ? svc.description['pt-BR'] : (svc.descKey || svc.description || '')
+                  const svcDisplayTags = typeof svc.tags === 'object' && !Array.isArray(svc.tags) ? (svc.tags['pt-BR'] || []) : (svc.tags || svc.tagKeys || [])
+                  return (
+                    <div className="admin-service-item" key={svc.id}>
+                      <div className="admin-service-icon">{SERVICE_ICONS[svc.icon]}</div>
+                      <div className="admin-service-info">
+                        <h3>{svcDisplayTitle}</h3>
+                        <p>{svcDisplayDesc}</p>
+                        {svcDisplayTags.length > 0 && (
+                          <div className="admin-service-tags">
+                            {svcDisplayTags.map((tag, i) => <span key={i}>{tag}</span>)}
+                          </div>
+                        )}
+                      </div>
+                      <div className="admin-project-actions">
+                        <button className="admin-btn" onClick={() => editService(svc)}>Editar</button>
+                        <button className="admin-btn admin-btn-danger" onClick={() => deleteService(svc.id)}>Remover</button>
+                      </div>
                     </div>
-                    <div className="admin-project-actions">
-                      <button className="admin-btn" onClick={() => editService(svc)}>Editar</button>
-                      <button className="admin-btn admin-btn-danger" onClick={() => deleteService(svc.id)}>Remover</button>
-                    </div>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
             )}
 

@@ -2084,6 +2084,45 @@ html:not([data-theme="dark"]) .hero-bg-image img {
     gap: 0.75rem;
 }
 
+/* Language Tabs (Admin) */
+.lang-tabs {
+    display: flex;
+    gap: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.lang-tab {
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--stone);
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.2s var(--ease);
+}
+
+.lang-tab:first-child {
+    border-radius: 6px 0 0 6px;
+}
+
+.lang-tab:last-child {
+    border-radius: 0 6px 6px 0;
+}
+
+.lang-tab.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #fff;
+}
+
+.lang-tab:hover:not(.active) {
+    border-color: var(--gold);
+    color: var(--gold);
+}
+
 .admin-btn-reset {
     margin-top: 1rem;
     background: none;

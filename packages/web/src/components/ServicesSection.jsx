@@ -27,8 +27,26 @@ const DEFAULT_SERVICES = [
 
 export { STORAGE_KEY as SERVICES_STORAGE_KEY, SERVICE_ICONS, DEFAULT_SERVICES }
 
+function resolveField(field, lang, t) {
+  // Translation key (DEFAULT_SERVICES)
+  if (typeof field === 'string' && field.startsWith('service.')) return t(field)
+  // Multi-lang object (admin-created)
+  if (typeof field === 'object' && field !== null && !Array.isArray(field)) return field[lang] || field['pt-BR'] || ''
+  // Plain string (legacy)
+  return field || ''
+}
+
+function resolveTags(service, lang, t) {
+  // Translation keys
+  if (service.tagKeys) return service.tagKeys.map(k => t(k))
+  // Multi-lang object
+  if (service.tags && typeof service.tags === 'object' && !Array.isArray(service.tags)) return service.tags[lang] || service.tags['pt-BR'] || []
+  // Plain array (legacy)
+  return service.tags || []
+}
+
 export default function ServicesSection() {
-  const { t } = useTranslation()
+  const { t, lang } = useTranslation()
   const gridRef = useRevealAnimations('.service-card')
   const [services, setServices] = useState([])
 
@@ -62,11 +80,11 @@ export default function ServicesSection() {
           {services.map((service, index) => (
             <div className="service-card" key={service.id} style={{ '--card-index': index }}>
               <div className="service-icon">{SERVICE_ICONS[service.icon]}</div>
-              <h3>{service.titleKey ? t(service.titleKey) : service.title}</h3>
-              <p>{service.descKey ? t(service.descKey) : service.description}</p>
+              <h3>{resolveField(service.titleKey || service.title, lang, t)}</h3>
+              <p>{resolveField(service.descKey || service.description, lang, t)}</p>
               <ul className="service-tags">
-                {(service.tagKeys || service.tags || []).map((tag, i) => (
-                  <li key={i}>{service.tagKeys ? t(tag) : tag}</li>
+                {resolveTags(service, lang, t).map((tag, i) => (
+                  <li key={i}>{tag}</li>
                 ))}
               </ul>
             </div>
