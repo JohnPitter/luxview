@@ -17,12 +17,12 @@ const SERVICE_ICONS = {
 }
 
 const DEFAULT_SERVICES = [
-  { id: '1', icon: 'web', title: 'Aplicações Web', description: 'Plataformas web modernas, responsivas e intuitivas.', tags: ['E-commerce', 'SaaS', 'Portais', 'Dashboards'] },
-  { id: '2', icon: 'mobile', title: 'Aplicativos Mobile', description: 'Apps nativos e híbridos com experiências fluidas.', tags: ['iOS', 'Android', 'React Native', 'Flutter'] },
-  { id: '3', icon: 'enterprise', title: 'Sistemas Empresariais', description: 'ERPs, CRMs e automações sob medida.', tags: ['ERP', 'CRM', 'Automação', 'Integrações'] },
-  { id: '4', icon: 'design', title: 'UX/UI Design', description: 'Interfaces que encantam e transformam interações.', tags: ['Interfaces', 'Protótipos', 'Design System', 'Pesquisa UX'] },
-  { id: '5', icon: 'digital', title: 'Transformação Digital', description: 'Consultoria estratégica para modernizar sua empresa.', tags: ['Consultoria', 'Estratégia', 'Cloud', 'DevOps'] },
-  { id: '6', icon: 'ai', title: 'Inteligência Artificial', description: 'Soluções com IA que automatizam e personalizam.', tags: ['Machine Learning', 'Chatbots', 'Analytics', 'NLP'] },
+  { id: '1', icon: 'web', titleKey: 'service.1.title', descKey: 'service.1.desc', tagKeys: ['service.1.tag1', 'service.1.tag2', 'service.1.tag3', 'service.1.tag4'] },
+  { id: '2', icon: 'mobile', titleKey: 'service.2.title', descKey: 'service.2.desc', tagKeys: ['service.2.tag1', 'service.2.tag2', 'service.2.tag3', 'service.2.tag4'] },
+  { id: '3', icon: 'enterprise', titleKey: 'service.3.title', descKey: 'service.3.desc', tagKeys: ['service.3.tag1', 'service.3.tag2', 'service.3.tag3', 'service.3.tag4'] },
+  { id: '4', icon: 'design', titleKey: 'service.4.title', descKey: 'service.4.desc', tagKeys: ['service.4.tag1', 'service.4.tag2', 'service.4.tag3', 'service.4.tag4'] },
+  { id: '5', icon: 'digital', titleKey: 'service.5.title', descKey: 'service.5.desc', tagKeys: ['service.5.tag1', 'service.5.tag2', 'service.5.tag3', 'service.5.tag4'] },
+  { id: '6', icon: 'ai', titleKey: 'service.6.title', descKey: 'service.6.desc', tagKeys: ['service.6.tag1', 'service.6.tag2', 'service.6.tag3', 'service.6.tag4'] },
 ]
 
 export { STORAGE_KEY as SERVICES_STORAGE_KEY, SERVICE_ICONS, DEFAULT_SERVICES }
@@ -35,7 +35,14 @@ export default function ServicesSection() {
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY)
     if (stored) {
-      setServices(JSON.parse(stored))
+      const parsed = JSON.parse(stored)
+      // If stored data has old format (no titleKey), use defaults
+      if (parsed.length > 0 && !parsed[0].titleKey) {
+        setServices(DEFAULT_SERVICES)
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_SERVICES))
+      } else {
+        setServices(parsed)
+      }
     } else {
       setServices(DEFAULT_SERVICES)
       localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_SERVICES))
@@ -55,11 +62,11 @@ export default function ServicesSection() {
           {services.map((service, index) => (
             <div className="service-card" key={service.id} style={{ '--card-index': index }}>
               <div className="service-icon">{SERVICE_ICONS[service.icon]}</div>
-              <h3>{service.title}</h3>
-              <p>{service.description}</p>
+              <h3>{service.titleKey ? t(service.titleKey) : service.title}</h3>
+              <p>{service.descKey ? t(service.descKey) : service.description}</p>
               <ul className="service-tags">
-                {service.tags.map((tag, i) => (
-                  <li key={i}>{tag}</li>
+                {(service.tagKeys || service.tags || []).map((tag, i) => (
+                  <li key={i}>{service.tagKeys ? t(tag) : tag}</li>
                 ))}
               </ul>
             </div>
